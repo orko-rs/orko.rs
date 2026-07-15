@@ -1,0 +1,90 @@
+/* App-wide styling */
+body {
+    background-color: #0f1116;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    border-bottom: 1px solid #22252e;
+}
+
+#navbar img {
+    height: 36px;
+}
+
+#navbar span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+#hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 48px 24px;
+}
+
+#hero-logo {
+    width: 180px;
+    max-width: 50vw;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin: 16px 0 0;
+    letter-spacing: 0.08em;
+}
+
+.tagline {
+    color: #9aa3b2;
+    font-size: 1.25rem;
+    margin: 12px 0 32px;
+}
+
+.cta {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 1px solid #3164de;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+}
+
+.btn:hover {
+    background-color: #22252e;
+}
+
+.btn.primary {
+    background-color: #3164de;
+}
+
+.btn.primary:hover {
+    background-color: #2a56c0;
+}
+
+#footer {
+    text-align: center;
+    padding: 20px;
+    color: #5c6470;
+    font-size: 0.875rem;
+    border-top: 1px solid #22252e;
+}
