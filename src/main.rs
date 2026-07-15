@@ -24,6 +24,18 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
+        document::Title { "Orko" }
+        document::Meta {
+            name: "description",
+            content: "Orko - coming soon for Rust",
+        }
+        document::Meta { property: "og:title", content: "Orko" }
+        document::Meta {
+            property: "og:description",
+            content: "Orko - coming soon for Rust",
+        }
+        document::Meta { property: "og:type", content: "website" }
+        document::Meta { name: "twitter:card", content: "summary" }
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: MAIN_CSS }
         Router::<Route> {}

@@ -3,7 +3,7 @@
 [web.app]
 
 # HTML title tag content
-title = "orko_rs"
+title = "Orko — Agent orchestration toolkit for Rust"
 
 # include `assets` in web platform
 [web.resource]

@@ -1,3 +1,4 @@
+use crate::components::{Footer, XLink};
 use crate::Route;
 use dioxus::prelude::*;
 
@@ -8,10 +9,11 @@ const LOGO: Asset = asset!("/assets/orko_logo.svg");
 pub fn Layout() -> Element {
     rsx! {
         nav { id: "navbar",
-            img { src: LOGO, alt: "orko logo" }
-            span { "orko" }
+            img { src: LOGO, alt: "orko logo", draggable: false }
+            span { "Orko" }
+            XLink {}
         }
         Outlet::<Route> {}
-        // footer { id: "footer", "© 2026 orko" }
+        Footer {}
     }
 }
