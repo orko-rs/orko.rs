@@ -10,7 +10,7 @@ pub fn Footer() -> Element {
                 href: "https://x.com/orko_agents",
                 target: "_blank",
                 rel: "noopener",
-                "[X]"
+                "X"
             }
             // "© 2026 orko"
         }
