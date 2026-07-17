@@ -1,6 +1,17 @@
 /* App-wide styling */
 :root {
     color-scheme: dark;
+    /* royal blue brand palette */
+    --royal-blue-50: #eef3fd;
+    --royal-blue-100: #d8e3fa;
+    --royal-blue-200: #b9cff6;
+    --royal-blue-300: #93b1f0;
+    --royal-blue-400: #6e97e8;
+    --royal-blue-500: #4169e1;
+    --royal-blue-600: #2f4fb5;
+    --royal-blue-700: #26408f;
+    --royal-blue-800: #22397f;
+    --royal-blue-900: #141f45;
 }
 
 body {
@@ -11,6 +22,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* chess grid: logo tile per cell, 2x2-cell conic checker behind it (image set in grid_background.rs) */
+    --cell: 45px;
+    background-size:
+        var(--cell) var(--cell),
+        calc(var(--cell) * 2) calc(var(--cell) * 2);
 }
 
 #navbar {
@@ -96,7 +112,7 @@ body {
 .btn {
     padding: 12px 28px;
     border-radius: 8px;
-    border: 1px solid #3164de;
+    border: 1px solid var(--royal-blue-500);
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
@@ -108,11 +124,11 @@ body {
 }
 
 .btn.primary {
-    background-color: #3164de;
+    background-color: var(--royal-blue-500);
 }
 
 .btn.primary:hover {
-    background-color: #2a56c0;
+    background-color: var(--royal-blue-600);
 }
 
 #footer {

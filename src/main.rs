@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 mod components;
 mod layout;
 
-use components::Home;
+use components::{GridBackground, Home};
 use layout::Layout;
 
 #[derive(Debug, Clone, Routable, PartialEq)]
@@ -38,6 +38,7 @@ fn App() -> Element {
         document::Meta { name: "twitter:card", content: "summary" }
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: MAIN_CSS }
+        GridBackground {}
         Router::<Route> {}
     }
 }
