@@ -1,4 +1,3 @@
-/* App-wide styling */
 :root {
     color-scheme: dark;
     /* royal blue brand palette */
@@ -12,26 +11,26 @@
     --royal-blue-700: #26408f;
     --royal-blue-800: #22397f;
     --royal-blue-900: #141f45;
-    --border-radius-inner: 20px;
-    --border-width: 15px;
-    --border-radius-outer: calc(
-        var(--border-radius-inner) + var(--border-width)
-    );
+    --border-radius: 20px; /* rounded cells (releases) */
+    --border-width: 12px; /* page-level pixel frames */
+    --border-width-sm: 6px; /* pixel frames on small controls */
 }
 
 body {
     background-color: #0f1116;
     color: #ffffff;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family:
+        "Space Grotesk", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* body background */
 #grid-background {
     position: fixed;
-    inset: -50vmax; /* oversized so the rotated corners still cover the viewport */
+    inset: -50vmax;
     z-index: -1;
     transform: rotate(-45deg);
     --cell: 45px;
@@ -43,67 +42,127 @@ body {
 
 @keyframes grid-scroll {
     to {
-        background-position:
-            calc(var(--cell) * 2) 0,
-            calc(var(--cell) * 2) 0;
+        transform: rotate(-45deg) translateX(calc(var(--cell) * 2));
     }
 }
 
+/* pixel frames (border-image-source is set in main.rs, next to the asset) */
 #navbar,
 #hero,
 #footer {
-    background-color: color-mix(
-        in srgb,
-        var(--royal-blue-900) 60%,
-        transparent
-    );
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: var(--border-width) solid var(--royal-blue-400);
-    border-radius: var(--border-radius-outer);
+    background-color: var(--royal-blue-900);
+    border: var(--border-width) solid transparent;
+    border-image-slice: 8;
+    border-image-repeat: round;
+}
+
+#navbar .x-link,
+.nav-menu summary,
+.nav-menu-panel,
+.releases,
+.btn {
+    border: var(--border-width-sm) solid transparent;
+    border-image-slice: 8;
+    border-image-repeat: round;
 }
 
 #navbar {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 32px;
+    padding: 6px 24px;
     margin: 32px 32px 0;
 }
 
 #navbar img {
-    height: 36px;
+    height: 28px;
     user-select: none;
     -webkit-user-select: none;
     -webkit-user-drag: none;
 }
 
 #navbar span {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: "Press Start 2P", monospace;
+    font-size: 1rem;
     letter-spacing: 0.05em;
 }
 
-.x-link {
-    display: inline-flex;
-    padding: 8px;
-    border-radius: 8px;
-    color: #ffffff;
-    transition: background-color 0.15s ease;
+#navbar .version {
+    font-size: 0.7rem;
+    color: var(--royal-blue-300);
 }
 
-.x-link:hover {
-    background-color: #22252e;
-}
-
-#navbar .x-link {
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-left: auto;
 }
 
-#footer .x-link {
-    font-weight: 500;
+.nav-link {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.8rem;
+    color: #ffffff;
     text-decoration: none;
-    line-height: 1;
+    padding: 8px;
+    transition: opacity 0.15s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.75;
+}
+
+#navbar .star-label {
+    font-family: "VT323", monospace;
+    font-size: 1rem;
+}
+
+#navbar .x-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 4px 20px; /* wide, not square */
+    transition: opacity 0.15s ease;
+}
+
+#navbar .x-link:hover {
+    opacity: 0.75;
+}
+
+/* navbar dropdown */
+.nav-menu {
+    display: none;
+    position: relative;
+    margin-left: auto;
+}
+
+.nav-menu summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 2px 12px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.nav-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.nav-menu-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    min-width: 140px;
+    background-color: var(--royal-blue-900);
 }
 
 #hero {
@@ -117,12 +176,101 @@ body {
     margin: 32px;
 }
 
-/* three equal columns: text | logo | features */
 .hero-text,
 .hero-logo,
-.hero-features {
+.releases {
     flex: 1;
     min-width: 0;
+}
+
+/* one-shot typing effect; 22ch = length of the boot text, 1 step per char */
+.boot-line {
+    font-family: "VT323", monospace;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--royal-blue-300);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 22ch;
+    margin: 0 auto;
+    border-right: 0.6ch solid var(--royal-blue-300); /* block cursor */
+    animation:
+        typing 2s steps(22),
+        blink 1s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+#hero h1 {
+    font-family: "Press Start 2P", monospace;
+    font-size: 2rem;
+    margin: 16px 0 0;
+    letter-spacing: 0.08em;
+}
+
+.tagline {
+    font-family: "VT323", monospace;
+    color: #9aa3b2;
+    font-size: 1.6rem; /* VT323 runs small and condensed */
+    margin: 12px 0 32px;
+}
+
+/* terminal chip; bordered like .stat / .release so it reads as one family */
+.install-cmd {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "VT323", monospace;
+    font-size: 1.1rem;
+    color: var(--royal-blue-100);
+    background-color: #0b0e1a; /* terminal-dark, below the palette */
+    padding: 6px 14px;
+    border: 1px solid var(--royal-blue-600);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.install-cmd:hover {
+    opacity: 0.75;
+}
+
+.install-cmd .prompt {
+    color: var(--royal-blue-400);
+}
+
+.install-cmd .copy-hint {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    color: var(--royal-blue-300);
+    margin-left: 4px;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.stat {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.6rem;
+    color: var(--royal-blue-200);
+    background-color: var(--royal-blue-800);
+    border: 1px solid var(--royal-blue-600);
+    padding: 6px 10px;
 }
 
 .hero-logo {
@@ -130,62 +278,99 @@ body {
     user-select: none;
     -webkit-user-select: none;
     -webkit-user-drag: none;
+    animation: bob 2s steps(4) infinite alternate;
 }
 
-.hero-features {
+@keyframes bob {
+    to {
+        transform: translateY(-12px);
+    }
+}
+
+/* latest GitHub releases (fetched in releases.rs) */
+.releases {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 16px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    padding: 24px;
 }
 
-.hero-features li {
+.releases h2 {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.release {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background-color: var(--royal-blue-800);
     border: 1px solid var(--royal-blue-600);
-    border-radius: var(--border-radius-inner);
+    border-radius: var(--border-radius);
     padding: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
 }
 
-#hero h1 {
-    font-size: 3rem;
-    margin: 16px 0 0;
-    letter-spacing: 0.08em;
+.release:hover {
+    opacity: 0.75;
 }
 
-.tagline {
+.release-tag {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.7rem;
+    color: var(--royal-blue-200);
+}
+
+.release-date {
+    font-size: 0.8rem;
     color: #9aa3b2;
+}
+
+.release-empty {
+    font-family: "VT323", monospace;
     font-size: 1.25rem;
-    margin: 12px 0 32px;
+    color: #9aa3b2;
+    margin: 0;
 }
 
 .cta {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 16px;
+    margin-top: 20px;
 }
 
+/* 8-bit button: pixel frame + hard drop shadow, presses down on click */
 .btn {
-    padding: 12px 28px;
-    border-radius: 8px;
-    border: 1px solid var(--royal-blue-500);
+    display: inline-flex;
+    align-items: center;
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.75rem;
+    padding: 14px 24px;
     color: #ffffff;
     text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.15s ease;
+    box-shadow: 4px 4px 0 #000000;
+    transition:
+        transform 0.05s ease,
+        box-shadow 0.05s ease;
 }
 
 .btn:hover {
-    background-color: #22252e;
+    filter: brightness(1.15);
+}
+
+.btn:active {
+    transform: translate(4px, 4px); /* sink into the shadow */
+    box-shadow: none;
 }
 
 .btn.primary {
     background-color: var(--royal-blue-500);
-}
-
-.btn.primary:hover {
-    background-color: var(--royal-blue-600);
 }
 
 #footer {
@@ -194,4 +379,84 @@ body {
     color: #5c6470;
     font-size: 0.875rem;
     margin: 0 32px 32px;
+}
+
+.footer-link {
+    display: inline-flex;
+    padding: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+
+.footer-link:hover {
+    opacity: 0.75;
+}
+
+/* tablet: stack the hero columns, tighten outer margins */
+@media (max-width: 900px) {
+    #navbar {
+        margin: 16px 16px 0;
+    }
+
+    #hero {
+        flex-direction: column;
+        gap: 32px;
+        margin: 16px;
+    }
+
+    .hero-text,
+    .hero-logo,
+    .releases {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-logo {
+        max-width: 220px;
+    }
+
+    .releases {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    #footer {
+        margin: 0 16px 16px;
+    }
+}
+
+/* mobile: collapse nav links into the dropdown, shrink type and frames */
+@media (max-width: 600px) {
+    :root {
+        --border-width: 8px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-menu {
+        display: block;
+    }
+
+    #navbar {
+        padding: 6px 16px;
+    }
+
+    #hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #grid-background,
+    .hero-logo,
+    .boot-line {
+        animation: none;
+    }
 }
