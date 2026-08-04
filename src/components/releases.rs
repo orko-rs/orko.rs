@@ -13,10 +13,9 @@ pub fn Releases() -> Element {
     });
 
     rsx! {
-        section { class: "releases",
-            h2 { "Releases" }
-            match &*releases.read() {
-                Some(Ok(list)) if list.as_array().is_some_and(|a| !a.is_empty()) => rsx! {
+        match &*releases.read() {
+            Some(Ok(list)) if list.as_array().is_some_and(|a| !a.is_empty()) => rsx! {
+                div { class: "release-list",
                     for r in list.as_array().unwrap().iter().take(3) {
                         a {
                             class: "release",
@@ -29,14 +28,14 @@ pub fn Releases() -> Element {
                             }
                         }
                     }
-                },
-                Some(_) => rsx! {
-                    p { class: "release-empty", "no releases yet" }
-                },
-                None => rsx! {
-                    p { class: "release-empty", "loading..." }
-                },
-            }
+                }
+            },
+            Some(_) => rsx! {
+                p { class: "release-empty", "No releases yet. The first tag is on its way..." }
+            },
+            None => rsx! {
+                p { class: "release-empty", "Loading…" }
+            },
         }
     }
 }

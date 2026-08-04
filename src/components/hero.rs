@@ -1,4 +1,4 @@
-use super::{InstallCmd, Releases, Stats};
+use super::InstallCmd;
 use dioxus::prelude::*;
 
 const LOGO: Asset = asset!("/assets/orko_logo.svg");
@@ -6,26 +6,31 @@ const LOGO: Asset = asset!("/assets/orko_logo.svg");
 #[component]
 pub fn Hero() -> Element {
     rsx! {
-        section { id: "hero",
-            div { class: "hero-text",
-                h2 { class: "boot-line", "initializing agents..." }
-                h1 { "Orko" }
-                p { class: "tagline", "The Agent orchestration toolkit for Rust." }
-                p { "<coming soon>" }
-                InstallCmd {}
-                div { class: "cta",
-                    // ponytail: dead link until docs exist, like the navbar Docs
-                    a { class: "btn primary", href: "#", "Get Started" }
+        section { id: "hero", class: "container",
+            h1 {
+                "Orko"
+                img {
+                    class: "h1-mark",
+                    src: LOGO,
+                    alt: "",
+                    draggable: false,
                 }
-                Stats {}
             }
-            img {
-                class: "hero-logo",
-                src: LOGO,
-                alt: "orko logo",
-                draggable: false,
+            p { class: "tagline",
+                "The agent orchestration toolkit for Rust. Compose efficient agents."
             }
-            Releases {}
+            p { class: "hero-meta", "Apache-2.0 · Coming soon" }
+            div { class: "cta",
+                a { class: "btn primary", href: "#", "Get Started" }
+                a {
+                    class: "btn ghost",
+                    href: "https://github.com/orko-rs/orko",
+                    target: "_blank",
+                    rel: "noopener",
+                    "View on GitHub"
+                }
+                InstallCmd {}
+            }
         }
     }
 }

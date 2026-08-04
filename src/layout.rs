@@ -12,9 +12,12 @@ pub fn Layout() -> Element {
             span { "Orko" }
             Version {}
             div { class: "nav-links",
-                a { class: "nav-link", href: "#", "Docs" }
-                GithubLink {}
+                a { class: "nav-link", href: "#toolkit", "Toolkit" }
+                a { class: "nav-link", href: "#releases", "Releases" }
+                a { class: "nav-link", href: "#community", "Community" }
+                a { class: "nav-link", href: "#documentation", "Docs" }
                 XLink {}
+                GithubLink {}
             }
             NavMenu {}
         }
