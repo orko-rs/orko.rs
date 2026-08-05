@@ -15,7 +15,11 @@ enum Route {
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
-const MAIN_CSS: Asset = asset!("/assets/main.css");
+// unhashed so index.html can link it before the wasm boots (avoids unstyled flash)
+const MAIN_CSS: Asset = asset!(
+    "/assets/main.css",
+    AssetOptions::builder().with_hash_suffix(false)
+);
 
 const DESCRIPTION: &str =
     "Orko: the agent orchestration toolkit for Rust. Compose efficient agents, under one runtime.";

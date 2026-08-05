@@ -1,4 +1,3 @@
-use super::{GithubLink, XLink};
 use dioxus::prelude::*;
 
 #[component]
@@ -11,8 +10,8 @@ pub fn NavMenu() -> Element {
                 a { class: "nav-link", href: "#releases", "Releases" }
                 a { class: "nav-link", href: "#community", "Community" }
                 a { class: "nav-link", href: "#documentation", "Docs" }
-                XLink {}
-                GithubLink {}
+                a { class: "nav-link", href: "https://x.com/orko_agents", "X" }
+                a { class: "nav-link", href: "https://github.com/orko-rs/orko", "GitHub" }
             }
         }
     }

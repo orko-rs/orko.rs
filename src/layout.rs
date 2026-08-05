@@ -1,8 +1,11 @@
-use crate::components::{Footer, GithubLink, NavMenu, Version, XLink};
+use crate::components::{Footer, GithubLink, NavMenu, XLink};
 use crate::Route;
 use dioxus::prelude::*;
 
-const LOGO: Asset = asset!("/assets/orko_logo.svg");
+const LOGO: Asset = asset!(
+    "/assets/orko_logo.svg",
+    AssetOptions::builder().with_hash_suffix(false)
+);
 
 #[component]
 pub fn Layout() -> Element {
@@ -10,7 +13,6 @@ pub fn Layout() -> Element {
         nav { id: "navbar",
             img { src: LOGO, alt: "orko logo", draggable: false }
             span { "Orko" }
-            Version {}
             div { class: "nav-links",
                 a { class: "nav-link", href: "#toolkit", "Toolkit" }
                 a { class: "nav-link", href: "#releases", "Releases" }

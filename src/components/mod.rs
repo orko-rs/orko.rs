@@ -6,7 +6,6 @@ mod install_cmd;
 mod nav_menu;
 mod releases;
 mod stats;
-mod version;
 mod x_link;
 
 pub use footer::Footer;
@@ -17,5 +16,4 @@ pub use install_cmd::InstallCmd;
 pub use nav_menu::NavMenu;
 pub use releases::Releases;
 pub use stats::StarCount;
-pub use version::Version;
 pub use x_link::XLink;

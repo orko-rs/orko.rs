@@ -1,7 +1,10 @@
 use super::InstallCmd;
 use dioxus::prelude::*;
 
-const LOGO: Asset = asset!("/assets/orko_logo.svg");
+const LOGO: Asset = asset!(
+    "/assets/orko_logo.svg",
+    AssetOptions::builder().with_hash_suffix(false)
+);
 
 #[component]
 pub fn Hero() -> Element {
