@@ -7,10 +7,10 @@ pub fn Footer() -> Element {
             div { class: "footer-cols container",
                 div { class: "footer-col",
                     div { class: "footer-heading", "Site" }
-                    a { href: "#toolkit", "Toolkit" }
-                    a { href: "#releases", "Releases" }
-                    a { href: "#community", "Community" }
-                    a { href: "#documentation", "Docs" }
+                    a { href: "/#toolkit", "Toolkit" }
+                    a { href: "/#releases", "Releases" }
+                    a { href: "/#community", "Community" }
+                    Link { to: "/docs", "Docs" }
                 }
                 div { class: "footer-col",
                     div { class: "footer-heading", "Socials" }

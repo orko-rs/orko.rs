@@ -24,7 +24,7 @@ pub fn Hero() -> Element {
             }
             p { class: "hero-meta", "Apache-2.0 · Coming soon" }
             div { class: "cta",
-                a { class: "btn primary", href: "#", "Get Started" }
+                Link { class: "btn primary", to: "/docs/getting-started", "Get Started" }
                 a {
                     class: "btn ghost",
                     href: "https://github.com/orko-rs/orko",

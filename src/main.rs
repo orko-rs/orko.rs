@@ -1,9 +1,11 @@
 use dioxus::prelude::*;
 
 mod components;
+mod docs;
 mod layout;
 
 use components::Home;
+use docs::DocPage;
 use layout::Layout;
 
 #[derive(Debug, Clone, Routable, PartialEq)]
@@ -12,6 +14,9 @@ enum Route {
     #[layout(Layout)]
     #[route("/")]
     Home {},
+    #[redirect("/docs", || Route::DocPage { slug: docs::FIRST_PAGE.to_string() })]
+    #[route("/docs/:slug")]
+    DocPage { slug: String },
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");

@@ -11,13 +11,15 @@ const LOGO: Asset = asset!(
 pub fn Layout() -> Element {
     rsx! {
         nav { id: "navbar",
-            img { src: LOGO, alt: "orko logo", draggable: false }
-            span { "Orko" }
+            Link { class: "nav-brand", to: Route::Home {},
+                img { src: LOGO, alt: "orko logo", draggable: false }
+                span { "Orko" }
+            }
             div { class: "nav-links",
-                a { class: "nav-link", href: "#toolkit", "Toolkit" }
-                a { class: "nav-link", href: "#releases", "Releases" }
-                a { class: "nav-link", href: "#community", "Community" }
-                a { class: "nav-link", href: "#documentation", "Docs" }
+                a { class: "nav-link", href: "/#toolkit", "Toolkit" }
+                a { class: "nav-link", href: "/#releases", "Releases" }
+                a { class: "nav-link", href: "/#community", "Community" }
+                Link { class: "nav-link", to: "/docs", "Docs" }
                 XLink {}
                 GithubLink {}
             }
