@@ -1,0 +1,10 @@
+# Cloudflare Workers static assets for orko.rs.
+# `name` must match the Worker's name in the Cloudflare dashboard.
+name = "orko-rs"
+compatibility_date = "2026-11-01"
+
+[assets]
+# Output of `dx bundle --release`.
+directory = "./target/dx/orko_rs/release/web/public"
+# Serve index.html for unknown paths so deep links like /docs/tools load the app.
+not_found_handling = "single-page-application"
