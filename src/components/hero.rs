@@ -8,6 +8,19 @@ const LOGO: Asset = asset!(
 
 #[component]
 pub fn Hero() -> Element {
+    let version = use_resource(|| async {
+        let v = reqwest::get("https://crates.io/api/v1/crates/orko")
+            .await
+            .ok()?
+            .json::<serde_json::Value>()
+            .await
+            .ok()?;
+        v["crate"]["max_stable_version"]
+            .as_str()
+            .map(|s| format!(" · v{s}"))
+    });
+    let version = version.read().clone().flatten().unwrap_or_default();
+
     rsx! {
         section { id: "hero", class: "container",
             h1 {
@@ -22,7 +35,7 @@ pub fn Hero() -> Element {
             p { class: "tagline",
                 "The agent orchestration toolkit for Rust. Compose efficient agents."
             }
-            p { class: "hero-meta", "Apache-2.0 · Coming soon" }
+            p { class: "hero-meta", "Apache-2.0{version}" }
             div { class: "cta",
                 Link { class: "btn primary", to: "/docs/getting-started", "Get Started" }
                 a {
