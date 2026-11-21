@@ -1,0 +1,4 @@
+# std ships DWARF 5 debug info that dx's wasm-opt can't parse (it aborts),
+# so have the linker drop debug sections from the wasm.
+[target.wasm32-unknown-unknown]
+rustflags = ["-C", "link-arg=--strip-debug"]
